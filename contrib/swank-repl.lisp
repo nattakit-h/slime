@@ -84,7 +84,7 @@ which is used just to send output.")
   "The buffering scheme that should be used for the output stream.
 Valid values are nil, t, :line")
 
-(defvar *globally-redirect-io* :started-from-emacs
+(defvar *globally-redirect-io* t
   "When T globally redirect all standard streams to Emacs.
 When :STARTED-FROM-EMACS redirect when launched by M-x slime")
 
