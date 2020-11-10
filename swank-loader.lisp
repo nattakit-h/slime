@@ -157,10 +157,12 @@ Return nil if nothing appropriate is available."
 (defun default-fasl-dir ()
   (merge-pathnames
    (make-pathname
-    :directory `(:relative ".slime" "fasl"
-                 ,@(if (slime-version-string) (list (slime-version-string)))
-                 ,(unique-dir-name)))
-   (user-homedir-pathname)))
+    :directory
+    `(:relative "slime" "fasl"
+                ,@(if (slime-version-string) (list (slime-version-string)))
+                ,(unique-dir-name)))
+   (or #+ecl (ext:getenv "XDG_DATA_HOME")
+       (merge-pathnames ".local/share" (user-homedir-pathname)))))
 
 (defvar *fasl-directory* (default-fasl-dir)
   "The directory where fasl files should be placed.")
